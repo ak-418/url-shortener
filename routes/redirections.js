@@ -16,4 +16,7 @@ router.get("/all", function (req, res) {
 // create a new redirection
 router.post("/create", services.shortenUrl);
 
+// fetch redirections if any
+router.get("/path/:from", services.getRedirection);
+
 module.exports = router;
