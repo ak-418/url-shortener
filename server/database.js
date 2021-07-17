@@ -3,7 +3,7 @@ const sequelize = new Sequelize(process.env.DB_SCHEMA || 'url_shortener',
 	process.env.DB_USER || 'amritha',
 	process.env.DB_PASSWORD || '',
 	{
-		host: process.env.DB_HOST || 'localhost',
+		host: process.env.DB_HOST || '127.0.0.1',
 		port: process.env.DB_PORT || 5432,
 		dialect: 'postgres',
 		dialectOptions: {
@@ -18,14 +18,16 @@ const Redirection = sequelize.define('redirections', {
 	},
 	from: {
 		type: Sequelize.STRING,
-		allowNull: true
+		allowNull: false,
+		unique: true,
 	},
 	to: {
 		type: Sequelize.STRING,
-		allowNull: true
+		allowNull: false
 	},
 	clicks: {
 		type: Sequelize.INTEGER,
+		defaultValue: 0
 	},
 	createdAt: {
 		type: Sequelize.DATE,
@@ -34,6 +36,7 @@ const Redirection = sequelize.define('redirections', {
 		type: Sequelize.DATE,
 	}
 });
+
 module.exports = {
 	sequelize: sequelize,
 	Redirection: Redirection
