@@ -18,11 +18,12 @@ const Redirection = sequelize.define('redirections', {
 	},
 	from: {
 		type: Sequelize.STRING,
-		allowNull: true
+		allowNull: false,
+		unique: true,
 	},
 	to: {
 		type: Sequelize.STRING,
-		allowNull: true
+		allowNull: false
 	},
 	clicks: {
 		type: Sequelize.INTEGER,
