@@ -3,5 +3,5 @@ import Shortener from "./shortener";
 
 export {
 	Listings,
-	Shortener
+	Shortener,
 }

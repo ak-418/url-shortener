@@ -3,17 +3,19 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import { Landing } from './container'
+import { Landing, RedirectHandler } from './container'
 
 function App() {
   return (
     <Router>
       <Switch>
-          <Route path="/">
-            <Landing />
-          </Route>
-        
-        </Switch>
+        <Route path="/:shortened" exact={true}>
+          <RedirectHandler />
+        </Route>
+        <Route path="/">
+          <Landing />
+        </Route>
+      </Switch>
     </Router>
   );
 }

@@ -22,10 +22,15 @@ const StyledCol = styled(Col)`
 
 const WrapperDiv = styled.div`
   margin: 3rem;
+  ${(props) => props.loading && css`
+    margin: 5rem;
+    text-align: center
+  `};
+
 `;
 
 const Listings = (props) => {
-  const { data } = props;
+  const { data, loading } = props;
 
   function renderExistingUrls() {
     return data.map((item, index) => renderRow(item, index + 1))
@@ -58,12 +63,15 @@ const Listings = (props) => {
   };
 
   return (
-    <WrapperDiv>
-      {data && data.length ?
-        <>
-          {renderRow(header)}
-          {renderExistingUrls()}
-        </> : 'No URLs added so far!'}
+    <WrapperDiv loading={loading}>
+
+      {loading ?
+        <i className='fa fa-spinner fa-spin' />
+        : data && data.length ?
+          <>
+            {renderRow(header)}
+            {renderExistingUrls()}
+          </> : 'No URLs added so far!'}
     </WrapperDiv>
   );
 }
