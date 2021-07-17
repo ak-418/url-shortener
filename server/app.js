@@ -17,12 +17,4 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/', indexRouter);
 app.use('/api/redirections', redirections);
-
-app.listen(PORT, (error) => {
-	if (error) {
-		return console.log('Error starting server', error);
-	}
-	console.log(`Server started Listening on ${PORT}`);
-});
-
 module.exports = app;

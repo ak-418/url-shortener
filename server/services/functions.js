@@ -5,7 +5,7 @@ const addNewUrl = async (data) => {
 	try {
 		return db.Redirection.create(data);
 	} catch (err) {
-		throw new Error();
+		throw new Error(err);
 	}
 };
 
@@ -18,7 +18,7 @@ const generateShortUrl = async (shortened) => {
 		}
 		generateShortUrl(generateAlphaNumericString(10));
 	} catch (err) {
-		throw new Error();
+		throw new Error(err);
 	}
 };
 
@@ -27,7 +27,7 @@ const fetchRedirection = async (from) => {
 		const response = await db.Redirection.findOne({ where: { from }, raw: true });
 		return response;
 	} catch (err) {
-		throw new Error();
+		throw new Error(err);
 	}
 };
 
@@ -36,7 +36,7 @@ const incrementClickCount = async (id) => {
 		const response = await db.Redirection.increment('clicks', { by: 1, where: { id } });
 		return response;
 	} catch (err) {
-		throw new Error();
+		throw new Error(err);
 	}
 }
 
@@ -54,7 +54,7 @@ const fetchAllRedirections = async () => {
 		const response = await db.Redirection.findAll({ order: [['createdAt', 'desc']] });
 		return response;
 	} catch (err) {
-		throw new Error();
+		throw new Error(err);
 	}
 };
 
