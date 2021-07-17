@@ -7,6 +7,8 @@ const {
 	generateShortUrl,
 	fetchRedirection,
 	incrementClickCount,
+	parseResponseItem,
+	fetchAllRedirections,
 } = require('./functions');
 
 const shortenUrl = async (req, res) => {
@@ -17,12 +19,12 @@ const shortenUrl = async (req, res) => {
 		}
 		const from = await generateShortUrl();
 
-		await addNewUrl({
+		const redirection = await addNewUrl({
 			from,
 			to,
 		});
 
-		return res.sendstatus(200);
+		return res.json(parseResponseItem(redirection));
 	} catch (error) {
 		console.log('Error shortening url', error);
 		return res.status(500).json({ error });
@@ -47,7 +49,18 @@ const getRedirection = async (req, res) => {
 	}
 };
 
+const getAllRedirections = async (req, res) => {
+	try {
+		const redirections = await fetchAllRedirections();
+		return res.json(redirections);
+	} catch (error) {
+		console.log("Error fetching redirections", error);
+		return res.status(500).json({ error })
+	}
+}
+
 module.exports = {
 	shortenUrl,
 	getRedirection,
+	getAllRedirections,
 }
