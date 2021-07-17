@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { Row, Col } from 'react-styled-flexboxgrid';
 import { Link } from 'react-router-dom';
 const header = {
-  index: 'No.', from: 'Shortened URL', to: 'Target URL', clicks: 'Times clicked', createdAt: 'Created at'
+  index: 'No.', from: 'Shortened URL', to: 'Target URL', clicks: 'Clicks', createdAt: 'Created at'
 }
 const StyledRow = styled(Row)`
   padding: 0.7rem 0;
@@ -18,15 +18,16 @@ const StyledRow = styled(Row)`
 
 const StyledCol = styled(Col)`
   margin: auto;
-`;
+  ${(props) => props.header ? `word-break: break-word` : `word-break: break-all`}`
+  ;
 
 const WrapperDiv = styled.div`
-  margin: 3rem;
+  margin: 3rem auto;
   ${(props) => props.loading && css`
     margin: 5rem;
     text-align: center
   `};
-
+  width: 80%;
 `;
 
 const Listings = (props) => {
@@ -39,23 +40,23 @@ const Listings = (props) => {
   function renderRow({ from, to, clicks, createdAt }, index) {
     const dateObj = new Date(createdAt);
     return (<StyledRow index={index} key={from} header={!index}>
-      <StyledCol xs={1}>
+      <StyledCol xs={false} sm={1} header={!index}>
         {!index ? 'No. ' : index}
       </StyledCol>
-      <StyledCol xs={3}>
+      <StyledCol xs={4} sm={3} header={!index}>
         {index ? <Link to={from}>
           {from}
         </Link> : from}
       </StyledCol>
-      <StyledCol xs={4}>
+      <StyledCol xs={5} sm={4} header={!index}>
         {index ? <a href={to}>
           {to}
         </a> : to}
       </StyledCol>
-      <StyledCol xs={2}>
+      <StyledCol xs={3} sm={2} header={!index}>
         {clicks}
       </StyledCol>
-      <StyledCol xs={2}>
+      <StyledCol xs={false} sm={2} header={!index}>
         {index ? `${dateObj.toLocaleDateString('en-IN')},  ${dateObj.toLocaleTimeString('en-US')}`
           : createdAt}
       </StyledCol>

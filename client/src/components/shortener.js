@@ -31,9 +31,10 @@ const Button = styled.button`
 
 const Wrapper = styled(Row)`
 	padding: 3rem;
-	box-shadow: 1px 2px 3px 0px #DDDDDD;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 	margin: 1rem auto;
 	text-align: center;
+	width: 80%;
 `;
 
 const Shortener = (props) => {
@@ -42,7 +43,7 @@ const Shortener = (props) => {
 
 	return (
 		<form onSubmit={(e) => { e.preventDefault(); handleSubmit(toUrl) }}>
-			<Wrapper style={{ width: "80%" }}>
+			<Wrapper >
 				{created ? <>
 					<Col xs={12}>Shortened URL created!
 						<br /> <br />Access it at {window.location.host}/{created.from}</Col>
@@ -61,6 +62,7 @@ const Shortener = (props) => {
 						<Col xs={9}>
 							<Input
 								type='url'
+								placeholder="Enter the URL to be shortened"
 								required={true}
 								onChange={(e) => setToUrl(e.target.value)}
 							/>
@@ -70,7 +72,7 @@ const Shortener = (props) => {
 								type='submit'
 								disabled={loading}
 							>
-								{loading ? <i className='fa fa-spinner fa-spin' /> : 'Shorten me'}
+								{loading ? <i className='fa fa-spinner fa-spin' /> : 'Shorten URL'}
 							</Button>
 						</Col>
 					</>
