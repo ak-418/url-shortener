@@ -40,9 +40,19 @@ const incrementClickCount = async (id) => {
 	}
 }
 
+const parseResponseItem = (item) =>{
+	return {
+		from: item.from,
+		to: item.to,
+		createdAt: item.createdAt,
+		clicks: item.clicks,
+	}
+}
+
 module.exports = {
 	addNewUrl,
 	generateShortUrl,
 	fetchRedirection,
 	incrementClickCount,
+	parseResponseItem,
 }

@@ -7,22 +7,24 @@ const {
 	generateShortUrl,
 	fetchRedirection,
 	incrementClickCount,
+	parseResponseItem,
 } = require('./functions');
 
 const shortenUrl = async (req, res) => {
 	try {
 		const { to } = req.body;
+		console.log({to});
 		if (!to || !isUrlValid(to)) {
 			return res.status(400).json({ message: "Missing/invalid URL" });
 		}
 		const from = await generateShortUrl();
 
-		await addNewUrl({
+		const redirection = await addNewUrl({
 			from,
 			to,
 		});
 
-		return res.sendstatus(200);
+		return res.json(parseResponseItem(redirection));
 	} catch (error) {
 		console.log('Error shortening url', error);
 		return res.status(500).json({ error });
