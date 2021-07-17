@@ -37,26 +37,45 @@ const Wrapper = styled(Row)`
 `;
 
 const Shortener = (props) => {
-	const { handleSubmit } = props;
+	const { handleSubmit, loading, created, reset } = props;
 	const [toUrl, setToUrl] = useState(null);
 
 	return (
 		<form onSubmit={(e) => { e.preventDefault(); handleSubmit(toUrl) }}>
 			<Wrapper style={{ width: "80%" }}>
-				<Col xs={9}>
-					<Input
-						type='url'
-						required={true}
-						onChange={(e) => setToUrl(e.target.value)}
-					/>
-				</Col>
-				<Col xs={3}>
-					<Button
-						type='submit'
-					>
-						Shorten me
-					</Button>
-				</Col>
+				{created ? <>
+					<Col xs={12}>Shortened URL created!
+						<br /> <br />Access it at {window.location.host}/{created.from}</Col>
+					<Col xs={12}>
+						<Button
+							type='button'
+							disabled={loading}
+							onClick={reset}
+							style={{ marginTop: '1rem' }}
+						>
+							Create another
+						</Button>
+					</Col>
+				</>
+					: <>
+						<Col xs={9}>
+							<Input
+								type='url'
+								required={true}
+								onChange={(e) => setToUrl(e.target.value)}
+							/>
+						</Col>
+						<Col xs={3}>
+							<Button
+								type='submit'
+								disabled={loading}
+							>
+								{loading ? <i className='fa fa-spinner fa-spin' /> : 'Shorten me'}
+							</Button>
+						</Col>
+					</>
+				}
+
 			</Wrapper>
 		</form>
 

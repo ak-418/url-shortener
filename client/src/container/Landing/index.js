@@ -7,6 +7,8 @@ const Wrapper = styled.div`
 `;
 const Landing = () => {
 	const [allUrls, setUrls] = useState([]);
+	const [loading, setLoading] = useState(false);
+	const [created, setCreated] = useState(null);
 
 	useEffect(() => {
 		fetch('/api/redirections/all')
@@ -20,16 +22,20 @@ const Landing = () => {
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ to: toUrl })
 		}
+		setLoading(true);
 		fetch('/api/redirections/create', options)
 			.then(res => res.json())
-			.then(data => console.log('=data', data))
-			.catch(err => { console.log(err) })
+			.then(data => { setUrls([data, ...allUrls]); setLoading(false); setCreated(data) })
+			.catch(err => { console.log(err); setLoading(false) })
 	};
 
 	console.log("---here")
 	return (<Wrapper>
 		<Shortener
 			handleSubmit={shortenUrl}
+			loading={loading}
+			created={created}
+			reset={() => setCreated(null)}
 		/>
 		<Listings
 			data={allUrls}
