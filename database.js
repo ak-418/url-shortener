@@ -26,6 +26,7 @@ const Redirection = sequelize.define('redirections', {
 	},
 	clicks: {
 		type: Sequelize.INTEGER,
+		defaultValue: 0
 	},
 	createdAt: {
 		type: Sequelize.DATE,
@@ -34,6 +35,7 @@ const Redirection = sequelize.define('redirections', {
 		type: Sequelize.DATE,
 	}
 });
+
 module.exports = {
 	sequelize: sequelize,
 	Redirection: Redirection
