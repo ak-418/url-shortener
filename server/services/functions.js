@@ -49,10 +49,20 @@ const parseResponseItem = (item) =>{
 	}
 }
 
+const fetchAllRedirections = async () => {
+	try {
+		const response = await db.Redirection.findAll({ order: [['createdAt', 'desc']] });
+		return response;
+	} catch (err) {
+		throw new Error();
+	}
+};
+
 module.exports = {
 	addNewUrl,
 	generateShortUrl,
 	fetchRedirection,
 	incrementClickCount,
 	parseResponseItem,
+	fetchAllRedirections,
 }

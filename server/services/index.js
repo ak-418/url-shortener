@@ -8,12 +8,12 @@ const {
 	fetchRedirection,
 	incrementClickCount,
 	parseResponseItem,
+	fetchAllRedirections,
 } = require('./functions');
 
 const shortenUrl = async (req, res) => {
 	try {
 		const { to } = req.body;
-		console.log({to});
 		if (!to || !isUrlValid(to)) {
 			return res.status(400).json({ message: "Missing/invalid URL" });
 		}
@@ -49,7 +49,18 @@ const getRedirection = async (req, res) => {
 	}
 };
 
+const getAllRedirections = async (req, res) => {
+	try {
+		const redirections = await fetchAllRedirections();
+		return res.json(redirections);
+	} catch (error) {
+		console.log("Error fetching redirections", error);
+		return res.status(500).json({ error })
+	}
+}
+
 module.exports = {
 	shortenUrl,
 	getRedirection,
+	getAllRedirections,
 }
