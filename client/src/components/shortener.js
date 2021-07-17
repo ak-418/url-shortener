@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Row, Col } from 'react-styled-flexboxgrid';
+import { Link } from 'react-router-dom';
 
 const Input = styled.input`
 	padding: 0px 5px;
@@ -46,7 +47,7 @@ const Shortener = (props) => {
 			<Wrapper >
 				{created ? <>
 					<Col xs={12}>Shortened URL created!
-						<br /> <br />Access it at {window.location.host}/{created.from}</Col>
+						<p>Access it at <Link to={`${created.from}`}>https://{window.location.host}/{created.from}</Link></p></Col>
 					<Col xs={12}>
 						<Button
 							type='button'

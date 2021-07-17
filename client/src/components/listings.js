@@ -30,6 +30,12 @@ const WrapperDiv = styled.div`
   width: 80%;
 `;
 
+const NoResults = styled.div`
+  text-align: center;
+  font-size: 2rem;
+  color: lightblue;
+`;
+
 const Listings = (props) => {
   const { data, loading } = props;
 
@@ -72,7 +78,8 @@ const Listings = (props) => {
           <>
             {renderRow(header)}
             {renderExistingUrls()}
-          </> : 'No URLs added so far!'}
+          </> :
+          <NoResults>No URLs added so far!</NoResults>}
     </WrapperDiv>
   );
 }
