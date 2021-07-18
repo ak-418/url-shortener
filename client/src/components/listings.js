@@ -45,7 +45,7 @@ const Listings = (props) => {
 
   function renderRow({ from, to, clicks, createdAt }, index) {
     const dateObj = new Date(createdAt);
-    return (<StyledRow index={index} key={from} header={!index}>
+    return (<StyledRow className={!index ? 'header' : 'entry'} index={index} key={from} header={!index}>
       <StyledCol xs={false} sm={1} header={!index}>
         {!index ? 'No. ' : index}
       </StyledCol>
@@ -79,7 +79,7 @@ const Listings = (props) => {
             {renderRow(header)}
             {renderExistingUrls()}
           </> :
-          <NoResults>No URLs added so far!</NoResults>}
+          <NoResults id='empty-result'>No URLs added so far!</NoResults>}
     </WrapperDiv>
   );
 }

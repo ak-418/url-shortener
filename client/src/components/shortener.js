@@ -43,10 +43,10 @@ const Shortener = (props) => {
 	const [toUrl, setToUrl] = useState(null);
 
 	return (
-		<form onSubmit={(e) => { e.preventDefault(); handleSubmit(toUrl) }}>
+		<form onSubmit={(e) => { e.preventDefault(); handleSubmit(toUrl) }} id='form'>
 			<Wrapper >
 				{created ? <>
-					<Col xs={12}>Shortened URL created!
+					<Col id={'success-msg'} xs={12}>Shortened URL created!
 						<p>Access it at <Link to={`${created.from}`}>https://{window.location.host}/{created.from}</Link></p></Col>
 					<Col xs={12}>
 						<Button
@@ -62,6 +62,7 @@ const Shortener = (props) => {
 					: <>
 						<Col xs={9}>
 							<Input
+								id='url'
 								type='url'
 								placeholder="Enter the URL to be shortened"
 								required={true}
@@ -70,6 +71,7 @@ const Shortener = (props) => {
 						</Col>
 						<Col xs={3}>
 							<Button
+								id='button'
 								type='submit'
 								disabled={loading}
 							>
